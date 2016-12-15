@@ -9,6 +9,8 @@ def home():
 
 	data = []
 
+	print "connecting to postgre database"
+
 	conn = psycopg2.connect(
 
 	database="da301k7aqru948", 
@@ -20,17 +22,15 @@ def home():
 
 	cur = conn.cursor()
 
-	cur.execute("select * from movies limit 10")
+	cur.execute("select * from movies limit 5")
 
 	data = cur.fetchall()
 
 	conn.close()
 
-
-
-	return render_template('index.html', vals = data)
+	return '<br><br>'.join(map(str,data))
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000))
 	print "Server starting..."
-	app.run(host='0.0.0.0', port=port, debug=True, threaded=True)
+	app.run(host='127.0.0.1', port=port, debug=True, threaded=True)
