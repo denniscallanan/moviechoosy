@@ -22,7 +22,7 @@ def home():
 
 	cur = conn.cursor()
 
-	cur.execute("select * from movies order desc limit 5")
+	cur.execute("select * from movies order by id desc limit 5")
 
 	data = cur.fetchall()
 
