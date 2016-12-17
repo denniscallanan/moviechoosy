@@ -2,12 +2,12 @@ import os, psycopg2
 
 from flask import Flask, render_template, request, redirect, url_for
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 @app.route('/')
 def home():
 
-	data = []
+	'''data = []
 
 	print "connecting to postgre database"
 
@@ -28,9 +28,11 @@ def home():
 
 	conn.close()
 
-	return '<br><br>'.join(map(str,data))
+	return '<br><br>'.join(map(str,data))'''
+
+	return render_template('index.html');
 
 if __name__ == '__main__':
-	port = int(os.environ.get('PORT', 5000))
 	print "Server starting..."
+	port = int(os.environ.get('PORT', 5000))
 	app.run(host='127.0.0.1', port=port, debug=True, threaded=True)

@@ -1,8 +1,86 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title>moviechoosy</title>
+	<title>Gregshmeg</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.blue-red.min.css">
+	<link rel="stylesheet" href="static/css/styles.css">
+	<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 </head>
-<body>
-	<h1> You've reached the home page! :) </h1>
+<script>
+function load(){
+		video.src = "https://www.youtube.com/embed/n0Kka0ozjbs?enablejsapi=1";
+}
+var ttog = false; // trailer toggle
+function trailer() {
+	if (ttog) {
+		hidetrailer();
+		return; }
+	ttog = true;
+	video.classList.add("visible");
+	moviecard.classList.add("trailer");
+	mtb.innerHTML = "Close Trailer";
+	document.body.classList.add("noscroll");
+	video.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}','*');
+	//video.contentWindow.seekTo(5);
+}
+
+function hidetrailer()
+{
+	video.classList.remove("visible");
+	moviecard.classList.remove("trailer");
+	mtb.innerHTML = "Watch Trailer";
+	document.body.classList.remove("noscroll");
+	video.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}','*');
+	ttog = false;
+}
+</script>
+<body onload="load();">
+	<div class="movie-card mdl-card mdl-shadow--2dp" id="moviecard">
+	  <div class="mdl-card__title" style="background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)), url('static/img/spiderman.jpg') center / cover;">
+	    <h2 class="mdl-card__title-text" style="transform: translateY(-8px);">The Amazing Spider-Man</h2>
+	  </div>
+	  <div class="mdl-card__supporting-text movie-card-content">
+	    After Peter Parker is bitten by a genetically altered spider, he gains newfound, spider-like powers and ventures out to solve the mystery of his parent's mysterious death. <a href="http://www.imdb.com/title/tt0948470/?ref_=nv_sr_2" class="movie-more-info" target="_blank">More Info..</a> <br><br>
+	    <span class="mdl-chip">
+    		<span class="mdl-chip__text movie-imdb-rating">
+    			<img src="static/img/imdb.png">
+    			7.0
+    		</span>
+		</span>
+		<span class="mdl-chip">
+    		<span class="mdl-chip__text movie-imdb-rating">
+    			<img src="static/img/rt.png">
+    			72%
+    		</span>
+		</span>
+		<span class="mdl-chip">
+    		<span class="mdl-chip__text movie-imdb-rating">
+    			<img src="static/img/cert.png">
+    			PG-13
+    		</span>
+		</span>
+		<span class="mdl-chip">
+    		<span class="mdl-chip__text movie-imdb-rating">
+    			<img src="static/img/clock3.png">
+    			2h16m
+    		</span>
+		</span><br><br><br>
+		<div style="width: 325px; margin: 0px auto;">
+		<span class="movie-likelytext">Are you in the mood for this movie tonight?</span><br><br>
+		<p style="width: 325px;"><input class="mdl-slider mdl-js-slider" type="range" min="0" max="10" value="5" tabindex="0"></p></div>
+	  </div>
+	  <div class="mdl-card__actions mdl-card--border movie-bottom-buttons">
+	    <a class="mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect movie-continue-button">
+	    	next
+	    </a>
+	  </div>
+	  <div class="mdl-card__menu">
+	    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent movie-trailer-button" onclick="trailer();" id="mtb">
+	      Watch Trailer
+	    </button>
+	  </div>
+	</div>
+	<iframe id="video" src="" frameborder="0"></iframe>
 </body>
 </html>
