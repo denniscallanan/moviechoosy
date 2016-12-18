@@ -29,7 +29,7 @@ def home():
 	data = cur.fetchone()
 
 	conn.close()
-	return render_template('index.html', title=tempcode(data[1]), info=tempcode(data[2]), backdrop=data[4], imdbrat=data[7], rtrat=data[9], cert=tempcode(data[10]), yt=data[11], runtime=data[12]);
+	return render_template('index.html', title=tempcode(data[1]), info=tempcode(data[2]), backdrop=data[4], imdbrat=data[7], rtrat=data[9], cert=tempcode(data[10]), yt=data[11], runtime=data[12], year=data[6]);
 
 if __name__ == '__main__':
 	print "Server starting..."

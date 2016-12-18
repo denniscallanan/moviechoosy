@@ -41,12 +41,15 @@ function hidetrailer()
 	    <h2 class="mdl-card__title-text" style="transform: translateY(-8px);">{{title}}</h2>
 	  </div>
 	  <div class="mdl-card__supporting-text movie-card-content">
-	    {{info}} <a href="http://www.imdb.com/title/tt0948470/?ref_=nv_sr_2" class="movie-more-info" target="_blank">More Info..</a> <br><br>
+	    <div class="expandable-text">
+	    	{{info}}
+	    </div>
+	    <a href="http://www.imdb.com/title/{{imdb}}/?ref_=nv_sr_2" class="movie-more-info" target="_blank">[More Info]</a> <br><br>
 	    <span class="mdl-chip">
     		<span class="mdl-chip__text movie-imdb-rating">
     			<img src="static/img/imdb.png">
     			<span id="imdbrat"></span>
-    			<script> imdbrat.innerHTML = {{imdbrat}} / 10; </script>
+    			<script> imdbrat.innerHTML = ({{imdbrat}} / 10).toFixed(1); </script>
     		</span>
 		</span>
 		<span class="mdl-chip">
@@ -65,6 +68,11 @@ function hidetrailer()
     		<span class="mdl-chip__text movie-imdb-rating">
     			<img src="static/img/clock3.png">
     			{{runtime}}m
+    		</span>
+		</span>
+		<span class="mdl-chip">
+    		<span class="mdl-chip__text movie-imdb-rating">
+    			{{year}}
     		</span>
 		</span><br><br><br>
 		<div style="width: 325px; margin: 0px auto;">
