@@ -9,7 +9,7 @@
 </head>
 <script>
 function load(){
-		video.src = "https://www.youtube.com/embed/n0Kka0ozjbs?enablejsapi=1";
+		video.src = "https://www.youtube.com/embed/{{yt}}?enablejsapi=1";
 }
 var ttog = false; // trailer toggle
 function trailer() {
@@ -37,33 +37,34 @@ function hidetrailer()
 </script>
 <body onload="load();">
 	<div class="movie-card mdl-card mdl-shadow--2dp" id="moviecard">
-	  <div class="mdl-card__title" style="background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)), url('static/img/spiderman.jpg') center / cover;">
-	    <h2 class="mdl-card__title-text" style="transform: translateY(-8px);">The Amazing Spider-Man</h2>
+	  <div class="mdl-card__title" style="background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 1)), url('https://image.tmdb.org/t/p/w640/{{backdrop}}') center / cover;">
+	    <h2 class="mdl-card__title-text" style="transform: translateY(-8px);">{{title}}</h2>
 	  </div>
 	  <div class="mdl-card__supporting-text movie-card-content">
-	    After Peter Parker is bitten by a genetically altered spider, he gains newfound, spider-like powers and ventures out to solve the mystery of his parent's mysterious death. <a href="http://www.imdb.com/title/tt0948470/?ref_=nv_sr_2" class="movie-more-info" target="_blank">More Info..</a> <br><br>
+	    {{info}} <a href="http://www.imdb.com/title/tt0948470/?ref_=nv_sr_2" class="movie-more-info" target="_blank">More Info..</a> <br><br>
 	    <span class="mdl-chip">
     		<span class="mdl-chip__text movie-imdb-rating">
     			<img src="static/img/imdb.png">
-    			7.0
+    			<span id="imdbrat"></span>
+    			<script> imdbrat.innerHTML = {{imdbrat}} / 10; </script>
     		</span>
 		</span>
 		<span class="mdl-chip">
     		<span class="mdl-chip__text movie-imdb-rating">
     			<img src="static/img/rt.png">
-    			72%
+    			{{rtrat}}%
     		</span>
 		</span>
 		<span class="mdl-chip">
     		<span class="mdl-chip__text movie-imdb-rating">
     			<img src="static/img/cert.png">
-    			PG-13
+    			{{cert}}
     		</span>
 		</span>
 		<span class="mdl-chip">
     		<span class="mdl-chip__text movie-imdb-rating">
     			<img src="static/img/clock3.png">
-    			2h16m
+    			{{runtime}}m
     		</span>
 		</span><br><br><br>
 		<div style="width: 325px; margin: 0px auto;">
@@ -71,7 +72,7 @@ function hidetrailer()
 		<p style="width: 325px;"><input class="mdl-slider mdl-js-slider" type="range" min="0" max="10" value="5" tabindex="0"></p></div>
 	  </div>
 	  <div class="mdl-card__actions mdl-card--border movie-bottom-buttons">
-	    <a class="mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect movie-continue-button">
+	    <a class="mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect movie-continue-button" onclick="location.reload();">
 	    	next
 	    </a>
 	  </div>

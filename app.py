@@ -4,12 +4,12 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__, static_url_path='/static')
 
+
+def tempcode(s):
+	return s.decode('unicode_escape').encode('ascii','ignore')
+
 @app.route('/')
 def home():
-
-	'''data = []
-
-	print "connecting to postgre database"
 
 	conn = psycopg2.connect(
 
@@ -22,15 +22,14 @@ def home():
 
 	cur = conn.cursor()
 
-	cur.execute("select * from movies order by id desc limit 5")
+	# unicode id=7088
 
-	data = cur.fetchall()
+	cur.execute("select * from movies order by random() limit 1")
+
+	data = cur.fetchone()
 
 	conn.close()
-
-	return '<br><br>'.join(map(str,data))'''
-
-	return render_template('index.html');
+	return render_template('index.html', title=tempcode(data[1]), info=tempcode(data[2]), backdrop=data[4], imdbrat=data[7], rtrat=data[9], cert=tempcode(data[10]), yt=data[11], runtime=data[12]);
 
 if __name__ == '__main__':
 	print "Server starting..."
