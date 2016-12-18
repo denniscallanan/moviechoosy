@@ -8,6 +8,31 @@
 	<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 </head>
 <script>
+
+function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for(var key in params) {
+        if(params.hasOwnProperty(key)) {
+            var hiddenField = document.createElement("input");
+            hiddenField.setAttribute("type", "hidden");
+            hiddenField.setAttribute("name", key);
+            hiddenField.setAttribute("value", params[key]);
+
+            form.appendChild(hiddenField);
+         }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
 function load(){
 		video.src = "https://www.youtube.com/embed/{{yt}}?enablejsapi=1";
 }
@@ -34,6 +59,17 @@ function hidetrailer()
 	video.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}','*');
 	ttog = false;
 }
+
+function nextMovie()
+{
+
+	var r = document.getElementById('movie-slider').value;
+	post('/', {slideval: r, mid: {{mid}}});
+
+
+}
+
+
 </script>
 <body onload="load();">
 	<div class="movie-card mdl-card mdl-shadow--2dp" id="moviecard">
@@ -81,10 +117,10 @@ function hidetrailer()
 		</span><br><br><br>
 		<div style="width: 325px; margin: 0px auto;">
 		<span class="movie-likelytext">Are you in the mood for this movie tonight?</span><br><br>
-		<p style="width: 325px;"><input class="mdl-slider mdl-js-slider" type="range" min="0" max="10" value="5" tabindex="0"></p></div>
+		<p style="width: 325px;"><input id="movie-slider" class="mdl-slider mdl-js-slider" type="range" min="0" max="10" value="5" tabindex="0"></p></div>
 	  </div>
 	  <div class="mdl-card__actions mdl-card--border movie-bottom-buttons">
-	    <a class="mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect movie-continue-button" onclick="location.reload();">
+	    <a class="mdl-button mdl-button--colored mdl-button--raised mdl-js-button mdl-js-ripple-effect movie-continue-button" onclick="nextMovie();">
 	    	next
 	    </a>
 	  </div>

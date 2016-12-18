@@ -11,7 +11,7 @@ app = Flask(__name__, static_url_path='/static')
 def tempcode(s):
 	return s.decode('unicode_escape').encode('ascii','ignore')
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def home():
 
 	conn = psycopg2.connect(
@@ -25,15 +25,22 @@ def home():
 
 	cur = conn.cursor()
 
-	# unicode id=7088
+	if 'mid' not in request.form:
 
-	cur.execute("select * from movies order by random() limit 1")
+		cur.execute("select * from movies order by random() limit 1")
+
+	else:
+
+		lastmovie = request.form['mid']
+		lastslideval = request.form['slideval']
+		cur.execute("select * from movies where id=%s", (lastmovie,))
+		# return movie based on predicition
 
 	data = cur.fetchone()
 
 	conn.close()
 
-	return render_template('index.html', title=data[1], info=data[2], backdrop=data[4], imdbrat=data[7], rtrat=data[9], cert=data[10].encode("utf-8"), yt=data[11], runtime=data[12], year=data[6], imdb=data[32]);
+	return render_template('index.html', mid=data[0], title=data[1], info=data[2], backdrop=data[4], imdbrat=data[7], rtrat=data[9], cert=data[10].encode("utf-8"), yt=data[11], runtime=data[12], year=data[6], imdb=data[32]);
 
 if __name__ == '__main__':
 	print "Server starting..."
