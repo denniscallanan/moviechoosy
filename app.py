@@ -1,6 +1,9 @@
-import os, psycopg2
+import os, psycopg2, psycopg2.extensions
 
 from flask import Flask, render_template, request, redirect, url_for
+
+psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
+psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -29,7 +32,8 @@ def home():
 	data = cur.fetchone()
 
 	conn.close()
-	return render_template('index.html', title=tempcode(data[1]), info=tempcode(data[2]), backdrop=data[4], imdbrat=data[7], rtrat=data[9], cert=tempcode(data[10]), yt=data[11], runtime=data[12], year=data[6]);
+
+	return render_template('index.html', title=data[1], info=data[2], backdrop=data[4], imdbrat=data[7], rtrat=data[9], cert=data[10].encode("utf-8"), yt=data[11], runtime=data[12], year=data[6], imdb=data[32]);
 
 if __name__ == '__main__':
 	print "Server starting..."
