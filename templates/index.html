@@ -52,18 +52,22 @@ function hidetrailer()
     			<script> imdbrat.innerHTML = ({{imdbrat}} / 10).toFixed(1); </script>
     		</span>
 		</span>
+		{% if rtrat > 0 %}
 		<span class="mdl-chip">
     		<span class="mdl-chip__text movie-imdb-rating">
     			<img src="static/img/rt.png">
     			{{rtrat}}%
     		</span>
 		</span>
+		{% endif %}
+		{% if cert != "UNRATED" and cert != "N/A" and cert != "NOT RATED" %}
 		<span class="mdl-chip">
     		<span class="mdl-chip__text movie-imdb-rating">
     			<img src="static/img/cert.png">
     			{{cert}}
     		</span>
 		</span>
+		{% endif %}
 		<span class="mdl-chip">
     		<span class="mdl-chip__text movie-imdb-rating">
     			<img src="static/img/clock3.png">
