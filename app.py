@@ -168,4 +168,5 @@ if __name__ == '__main__':
 	print "Server starting..."
 	port = int(os.environ.get('PORT', 5000))
 	app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+	app.config['SESSION_TYPE'] = 'filesystem'
 	app.run(host='127.0.0.1', port=port, debug=True, threaded=True)
