@@ -7,7 +7,8 @@ psycopg2.extensions.register_type(psycopg2.extensions.UNICODEARRAY)
 
 app = Flask(__name__, static_url_path='/static')
 
-
+app.config['SESSION_TYPE'] = 'memcached'
+app.config['SECRET_KEY'] = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 sessionData = {}
 
@@ -167,6 +168,4 @@ def home():
 if __name__ == '__main__':
 	print "Server starting..."
 	port = int(os.environ.get('PORT', 5000))
-	app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-	app.config['SESSION_TYPE'] = 'filesystem'
 	app.run(host='127.0.0.1', port=port, debug=True, threaded=True)
